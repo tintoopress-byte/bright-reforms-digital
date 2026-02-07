@@ -8,11 +8,15 @@ import StatCard from "@/components/StatCard";
 import BentoGrid from "@/components/BentoGrid";
 
 import heroImage from "@/assets/hero-school.jpg";
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
-import gallery5 from "@/assets/gallery-5.jpg";
+
+// Home gallery images
+import homeCakeDecorating1 from "@/assets/home-cake-decorating-1.jpg";
+import homeCakeDecorating2 from "@/assets/home-cake-decorating-2.jpg";
+import homeStudentsCake from "@/assets/home-students-cake.jpg";
+import homeSewingClass from "@/assets/home-sewing-class.jpg";
+import homeChildrenEvent from "@/assets/home-children-event.jpg";
+import homeStudentsTeacher from "@/assets/home-students-teacher.jpg";
+import homeParentsGroup from "@/assets/home-parents-group.jpg";
 
 const stats = [
   { icon: Users, value: "500+", label: "Students Enrolled" },
@@ -22,11 +26,13 @@ const stats = [
 ];
 
 const galleryPreview = [
-  { src: gallery1, alt: "Students learning in classroom", span: "col-span-2 row-span-2" },
-  { src: gallery2, alt: "Science laboratory activities" },
-  { src: gallery3, alt: "Sports and outdoor activities" },
-  { src: gallery4, alt: "Graduation ceremony", span: "row-span-2" },
-  { src: gallery5, alt: "Arts and creativity" },
+  { src: homeStudentsCake, alt: "Students celebrating with school cake", span: "col-span-2 row-span-2" },
+  { src: homeCakeDecorating1, alt: "Student decorating a green cake" },
+  { src: homeCakeDecorating2, alt: "Student with chef hat decorating cake" },
+  { src: homeSewingClass, alt: "Students learning sewing skills", span: "row-span-2" },
+  { src: homeChildrenEvent, alt: "Children at school event in pink dresses" },
+  { src: homeStudentsTeacher, alt: "Students with their teacher", span: "col-span-2" },
+  { src: homeParentsGroup, alt: "Parents group photo at school" },
 ];
 
 const Index = () => {
