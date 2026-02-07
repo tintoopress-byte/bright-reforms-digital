@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import schoolLogo from "@/assets/school-logo.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -21,10 +22,12 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-8">
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-soft">
-              <span className="text-primary-foreground font-display text-xl">BR</span>
-            </div>
+          <Link to="/" className="flex items-center gap-2 group">
+            <img 
+              src={schoolLogo} 
+              alt="Bright Reformer Schools Logo" 
+              className="h-14 w-auto object-contain"
+            />
             <div className="hidden sm:block">
               <h1 className="font-display text-lg text-foreground leading-tight">
                 Bright Reformer

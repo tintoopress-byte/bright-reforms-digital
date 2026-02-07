@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Mail, Clock } from "lucide-react";
+import schoolLogo from "@/assets/school-logo.png";
 
 const Footer = () => {
   return (
@@ -9,9 +10,11 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-display text-xl">BR</span>
-              </div>
+              <img 
+                src={schoolLogo} 
+                alt="Bright Reformer Schools Logo" 
+                className="h-16 w-auto object-contain"
+              />
               <div>
                 <h3 className="font-display text-lg leading-tight">Bright Reformer</h3>
                 <p className="text-xs text-background/70">Schools</p>
