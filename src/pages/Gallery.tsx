@@ -4,16 +4,7 @@ import Footer from "@/components/Footer";
 import SectionTitle from "@/components/SectionTitle";
 import BentoGrid from "@/components/BentoGrid";
 
-// Original gallery images
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
-import gallery5 from "@/assets/gallery-5.jpg";
-import gallery6 from "@/assets/gallery-6.jpg";
-import gallery7 from "@/assets/gallery-7.jpg";
-
-// New uploaded images
+// Real uploaded images only
 import computerClass from "@/assets/gallery-computer-class.jpg";
 import schoolCake from "@/assets/gallery-school-cake.jpg";
 import cookingClass from "@/assets/gallery-cooking-class.jpg";
@@ -22,6 +13,11 @@ import cakeDecorating2 from "@/assets/gallery-cake-decorating-2.jpg";
 import cakeDecorating3 from "@/assets/gallery-cake-decorating-3.jpg";
 import studentsCelebration from "@/assets/gallery-students-celebration.jpg";
 import groupPhoto from "@/assets/gallery-group-photo.jpg";
+import sewingClass from "@/assets/gallery-sewing-class.jpg";
+import childrenEvent from "@/assets/gallery-children-event.jpg";
+import speech from "@/assets/gallery-speech.jpg";
+import studentsTeacher from "@/assets/gallery-students-teacher.jpg";
+import parentsMeeting from "@/assets/gallery-parents-meeting.jpg";
 
 const galleryImages = [
   {
@@ -52,8 +48,8 @@ const galleryImages = [
     span: "col-span-2"
   },
   {
-    src: gallery1,
-    alt: "Students learning in classroom",
+    src: studentsTeacher,
+    alt: "Students with their teacher",
     span: "col-span-2 row-span-2"
   },
   {
@@ -65,31 +61,22 @@ const galleryImages = [
     alt: "Student chef decorating cake"
   },
   {
-    src: gallery2,
-    alt: "Science laboratory activities"
+    src: sewingClass,
+    alt: "Sewing and tailoring skills training"
   },
   {
-    src: gallery3,
-    alt: "Sports and outdoor activities"
+    src: childrenEvent,
+    alt: "Children at school event in beautiful attire"
   },
   {
-    src: gallery4,
-    alt: "Graduation ceremony",
+    src: speech,
+    alt: "School event - speech presentation",
     span: "row-span-2"
   },
   {
-    src: gallery5,
-    alt: "Arts and creativity"
-  },
-  {
-    src: gallery6,
-    alt: "Library and reading",
+    src: parentsMeeting,
+    alt: "Parents and teachers group photo",
     span: "col-span-2"
-  },
-  {
-    src: gallery7,
-    alt: "School assembly",
-    span: "col-span-2 row-span-2"
   }
 ];
 

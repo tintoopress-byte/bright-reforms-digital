@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface BentoGridProps {
   images: { src: string; alt: string; span?: string }[];
@@ -8,6 +9,7 @@ interface BentoGridProps {
 }
 
 const BentoGrid = ({ images, showLightbox = true }: BentoGridProps) => {
+  const isMobile = useIsMobile();
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
 
@@ -75,7 +77,12 @@ const BentoGrid = ({ images, showLightbox = true }: BentoGridProps) => {
 
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
+      {/* Mobile: Simple grid, Desktop: Bento grid */}
+      <div className={
+        isMobile 
+          ? "grid grid-cols-2 gap-3" 
+          : "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]"
+      }>
         {images.map((image, index) => (
           <motion.div
             key={index}
@@ -83,7 +90,9 @@ const BentoGrid = ({ images, showLightbox = true }: BentoGridProps) => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
             viewport={{ once: true }}
-            className={`bento-item cursor-pointer group ${image.span || ""}`}
+            className={`relative overflow-hidden rounded-xl cursor-pointer group ${
+              isMobile ? "aspect-square" : (image.span || "")
+            }`}
             onClick={() => showLightbox && setSelectedImage(index)}
           >
             <img
