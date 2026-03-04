@@ -19,10 +19,10 @@ import homeStudentsTeacher from "@/assets/home-students-teacher.jpg";
 import homeParentsGroup from "@/assets/home-parents-group.jpg";
 
 const stats = [
-  { icon: Users, value: "500+", label: "Students Enrolled" },
-  { icon: GraduationCap, value: "15+", label: "Years of Excellence" },
+  { icon: Users, value: "100+", label: "Students Enrolled" },
+  { icon: GraduationCap, value: "5+", label: "Years of Excellence" },
   { icon: Award, value: "50+", label: "Academic Awards" },
-  { icon: BookOpen, value: "30+", label: "Qualified Teachers" },
+  { icon: BookOpen, value: "20+", label: "Qualified Teachers" },
 ];
 
 const galleryPreview = [
@@ -136,7 +136,7 @@ const Index = () => {
           <SectionTitle
             subtitle="Who We Are"
             title="Building Future Leaders"
-            description="For over 15 years, Bright Reformer Schools has been dedicated to providing exceptional education that combines academic rigor with moral development."
+            description="Since the 2018/2019 academic session, Bright Reformer Schools has been dedicated to providing exceptional education that combines academic rigor with moral development."
           />
 
           {/* Stats Grid */}
