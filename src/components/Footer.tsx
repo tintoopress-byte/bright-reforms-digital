@@ -63,16 +63,16 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <Mail size={18} className="text-primary mt-0.5 flex-shrink-0" />
                 <a
-                  href="mailto:info@brightreformerschools.com"
+                  href="mailto:hello.brightreformerschools@gmail.com"
                   className="text-sm text-background/70 hover:text-primary transition-colors"
                 >
-                  info@brightreformerschools.com
+                  hello.brightreformerschools@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-primary mt-0.5 flex-shrink-0" />
                 <span className="text-sm text-background/70">
-                  Bright Reformer Schools, Nigeria
+                  Ewunmi Avenue, Mopelufa, off Aleke Bus Stop, Ikorodu, Lagos State
                 </span>
               </li>
             </ul>
@@ -85,8 +85,10 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <Clock size={18} className="text-primary mt-0.5 flex-shrink-0" />
                 <div className="text-sm text-background/70">
-                  <p>Monday - Friday</p>
+                  <p>Monday - Thursday</p>
                   <p className="text-background">8:00 AM - 3:00 PM</p>
+                  <p className="mt-1">Friday</p>
+                  <p className="text-background">8:00 AM - 1:00 PM</p>
                 </div>
               </li>
             </ul>

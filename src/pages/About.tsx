@@ -47,13 +47,13 @@ const AboutPage = () => {
               />
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Bright Reformer Schools was founded with a singular vision: to create an institution where academic excellence and character development go hand in hand. For over 15 years, we have remained committed to this founding principle.
+                  Bright Reformer Schools was founded in the 2018/2019 academic session with a singular vision: to create an institution where academic excellence and character development go hand in hand. For over 5 years, we have remained committed to this founding principle.
                 </p>
                 <p>
                   Our journey began with a small group of dedicated educators who believed that every child deserves access to quality education that nurtures not just the mind, but also the heart and spirit.
                 </p>
                 <p>
-                  Today, we stand proud as one of the leading educational institutions in our community, with hundreds of successful alumni who have gone on to make significant contributions in various fields across Nigeria and beyond.
+                  Today, we stand proud as one of the leading educational institutions in our community, with successful alumni who have gone on to make significant contributions in various fields across Nigeria and beyond.
                 </p>
               </div>
             </motion.div>
@@ -68,10 +68,10 @@ const AboutPage = () => {
               <div className="bg-primary-light rounded-3xl p-8 md:p-12">
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { value: "2010", label: "Year Founded" },
-                    { value: "500+", label: "Students" },
-                    { value: "30+", label: "Teachers" },
-                    { value: "98%", label: "Success Rate" },
+                    { value: "2018", label: "Year Founded" },
+                    { value: "100+", label: "Students" },
+                    { value: "20+", label: "Teachers" },
+                    { value: "50+", label: "Academic Awards" },
                   ].map((stat, index) => (
                     <div key={stat.label} className="text-center">
                       <div className="font-display text-3xl md:text-4xl text-primary mb-1">
@@ -106,7 +106,7 @@ const AboutPage = () => {
                 Our Mission
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                To provide a comprehensive educational experience that develops students academically, morally, and socially, preparing them to become responsible citizens and future leaders who will positively impact their communities and the world at large.
+                To provide support for all pupils and students, to achieve academic excellence and grow their unique talents so that they find joy and fulfilment in life.
               </p>
             </motion.div>
 
@@ -125,7 +125,7 @@ const AboutPage = () => {
                 Our Vision
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                To be the leading educational institution recognized for producing well-rounded individuals who excel in academics, demonstrate strong moral character, and are equipped with the skills and values needed to thrive in an ever-changing global society.
+                Bright Reformer Schools pupils and students will become leaders whose lives have been influenced positively to enrich our world.
               </p>
             </motion.div>
           </div>
@@ -150,15 +150,15 @@ const AboutPage = () => {
             <div className="bg-card rounded-3xl p-8 md:p-12 shadow-soft border border-border text-center">
               <Heart className="w-12 h-12 text-accent mx-auto mb-6" />
               <blockquote className="text-lg md:text-xl text-foreground leading-relaxed italic font-medium">
-                "I pledge to uphold the values of Bright Reformer Schools,
+                "I pledge to Bright Reformer Schools,
                 <br />
-                To pursue excellence in all my endeavors,
+                The builder of outstanding leaders,
                 <br />
-                To respect my teachers, parents, and fellow students,
+                To form our lives positively,
                 <br />
-                To be honest, diligent, and kind,
+                To be a light to this generation.
                 <br />
-                To make my school, my family, and my nation proud,
+                I promise to be a person filled with dignity, honour, and respect,
                 <br />
                 So help me God."
               </blockquote>
@@ -187,51 +187,29 @@ const AboutPage = () => {
               <Music className="w-12 h-12 text-primary-foreground mx-auto mb-6" />
               
               <div className="text-center space-y-8">
-                {/* Verse 1 */}
                 <div>
-                  <h4 className="text-sm font-semibold text-primary-foreground/70 uppercase tracking-wider mb-3">
-                    Verse 1
-                  </h4>
                   <p className="text-primary-foreground text-lg leading-relaxed">
-                    Bright Reformer, our alma mater dear,
+                    We hail the Bright Reformer School,
                     <br />
-                    Where knowledge and virtue shine so clear,
+                    Through you our lives have been reformed.
                     <br />
-                    With hearts united, we stand as one,
+                    You are filled with grace which can't be fathomed,
                     <br />
-                    Our journey to excellence has just begun.
-                  </p>
-                </div>
-
-                {/* Chorus */}
-                <div>
-                  <h4 className="text-sm font-semibold text-primary-foreground/70 uppercase tracking-wider mb-3">
-                    Chorus
-                  </h4>
-                  <p className="text-primary-foreground text-lg leading-relaxed font-semibold">
-                    Moulding lives for excellence,
+                    We stand in awe of you.
+                    <br /><br />
+                    From you kings and queens come forth,
                     <br />
-                    Building futures bright and true,
+                    And you are filled with boundless lots of knowledge.
                     <br />
-                    Bright Reformer, we salute you,
+                    We hope to be filled with all the benefits we gained from you.
+                    <br /><br />
+                    We proclaim the depths of excellence that you instil in our lives.
                     <br />
-                    Forever loyal, forever true!
-                  </p>
-                </div>
-
-                {/* Verse 2 */}
-                <div>
-                  <h4 className="text-sm font-semibold text-primary-foreground/70 uppercase tracking-wider mb-3">
-                    Verse 2
-                  </h4>
-                  <p className="text-primary-foreground text-lg leading-relaxed">
-                    With discipline and honor as our guide,
+                    You are like a mighty sun which giveth light that is bright enough for a day.
+                    <br /><br />
+                    You train us to be morally upright and to be filled with dignity.
                     <br />
-                    In learning and in service, we take pride,
-                    <br />
-                    The sky is not our limit, we soar high,
-                    <br />
-                    Bright Reformer's spirit will never die.
+                    We promise to abide by the pure and upright truth you have given us.
                   </p>
                 </div>
               </div>

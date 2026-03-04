@@ -26,21 +26,21 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Address",
-    value: "info@brightreformerschools.com",
-    link: "mailto:info@brightreformerschools.com",
+    value: "hello.brightreformerschools@gmail.com",
+    link: "mailto:hello.brightreformerschools@gmail.com",
     description: "Send us an email",
   },
   {
     icon: MapPin,
     title: "School Address",
-    value: "Bright Reformer Schools, Nigeria",
+    value: "Ewunmi Avenue, Mopelufa, off Aleke Bus Stop, Ikorodu, Lagos State",
     link: "#",
     description: "Visit our campus",
   },
   {
     icon: Clock,
     title: "School Hours",
-    value: "Mon - Fri: 8:00 AM - 3:00 PM",
+    value: "Mon - Thu: 8:00 AM - 3:00 PM, Fri: 8:00 AM - 1:00 PM",
     link: "#",
     description: "Administrative hours",
   },
@@ -341,7 +341,7 @@ const ContactPage = () => {
                   Bright Reformer Schools
                 </h3>
                 <p className="text-muted-foreground">
-                  Nigeria
+                  Ewunmi Avenue, Mopelufa, off Aleke Bus Stop, Ikorodu, Lagos State
                 </p>
                 <a
                   href="tel:08166338104"
