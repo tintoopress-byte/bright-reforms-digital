@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Mail, Clock } from "lucide-react";
 import schoolLogo from "@/assets/school-logo.png";
+import ImageUploadDialog from "@/components/ImageUploadDialog";
 
 const Footer = () => {
   return (
@@ -99,7 +100,15 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-background/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-background/60">
-              © {new Date().getFullYear()} Bright Reformer Schools. All rights reserved.
+              © {new Date().getFullYear()}{" "}
+              <ImageUploadDialog
+                trigger={
+                  <button className="hover:text-primary transition-colors cursor-pointer">
+                    Bright Reformer Schools
+                  </button>
+                }
+              />
+              . All rights reserved.
             </p>
             <p className="text-sm text-background/60 italic">
               "Moulding Lives for Excellence"
