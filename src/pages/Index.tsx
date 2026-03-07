@@ -32,8 +32,7 @@ const galleryPreview = [
   { src: homeSewingClass, alt: "Students learning sewing skills", span: "row-span-2" },
   { src: homeChildrenEvent, alt: "Children at school event in pink dresses" },
   { src: homeStudentsTeacher, alt: "Students with their teacher", span: "col-span-2" },
-  { src: homeParentsGroup, alt: "Parents group photo at school" },
-];
+].slice(0, 6);
 
 const Index = () => {
   return (
