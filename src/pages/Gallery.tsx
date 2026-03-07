@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SectionTitle from "@/components/SectionTitle";
 import BentoGrid from "@/components/BentoGrid";
+import { supabase } from "@/integrations/supabase/client";
 
 // Real uploaded images only
 import computerClass from "@/assets/gallery-computer-class.jpg";
@@ -19,68 +21,47 @@ import speech from "@/assets/gallery-speech.jpg";
 import studentsTeacher from "@/assets/gallery-students-teacher.jpg";
 import parentsMeeting from "@/assets/gallery-parents-meeting.jpg";
 
-const galleryImages = [
-  {
-    src: groupPhoto,
-    alt: "Students celebrating with school cake",
-    span: "col-span-2 row-span-2"
-  },
-  {
-    src: computerClass,
-    alt: "Computer class - ICT learning"
-  },
-  {
-    src: schoolCake,
-    alt: "Bright Reformer Schools celebration cake"
-  },
-  {
-    src: cookingClass,
-    alt: "Culinary arts - hands-on cooking class",
-    span: "row-span-2"
-  },
-  {
-    src: cakeDecorating1,
-    alt: "Students learning cake decoration"
-  },
-  {
-    src: studentsCelebration,
-    alt: "Students group celebration photo",
-    span: "col-span-2"
-  },
-  {
-    src: studentsTeacher,
-    alt: "Students with their teacher",
-    span: "col-span-2 row-span-2"
-  },
-  {
-    src: cakeDecorating2,
-    alt: "Cake decorating skills training"
-  },
-  {
-    src: cakeDecorating3,
-    alt: "Student chef decorating cake"
-  },
-  {
-    src: sewingClass,
-    alt: "Sewing and tailoring skills training"
-  },
-  {
-    src: childrenEvent,
-    alt: "Children at school event in beautiful attire"
-  },
-  {
-    src: speech,
-    alt: "School event - speech presentation",
-    span: "row-span-2"
-  },
-  {
-    src: parentsMeeting,
-    alt: "Parents and teachers group photo",
-    span: "col-span-2"
-  }
+const staticGalleryImages = [
+  { src: groupPhoto, alt: "Students celebrating with school cake", span: "col-span-2 row-span-2" },
+  { src: computerClass, alt: "Computer class - ICT learning" },
+  { src: schoolCake, alt: "Bright Reformer Schools celebration cake" },
+  { src: cookingClass, alt: "Culinary arts - hands-on cooking class", span: "row-span-2" },
+  { src: cakeDecorating1, alt: "Students learning cake decoration" },
+  { src: studentsCelebration, alt: "Students group celebration photo", span: "col-span-2" },
+  { src: studentsTeacher, alt: "Students with their teacher", span: "col-span-2 row-span-2" },
+  { src: cakeDecorating2, alt: "Cake decorating skills training" },
+  { src: cakeDecorating3, alt: "Student chef decorating cake" },
+  { src: sewingClass, alt: "Sewing and tailoring skills training" },
+  { src: childrenEvent, alt: "Children at school event in beautiful attire" },
+  { src: speech, alt: "School event - speech presentation", span: "row-span-2" },
+  { src: parentsMeeting, alt: "Parents and teachers group photo", span: "col-span-2" },
 ];
 
 const GalleryPage = () => {
+  const [allImages, setAllImages] = useState(staticGalleryImages);
+
+  useEffect(() => {
+    const fetchUploadedImages = async () => {
+      const { data, error } = await supabase
+        .from("gallery_images")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (!error && data && data.length > 0) {
+        const uploadedImages = data.map((img) => {
+          const { data: urlData } = supabase.storage.from("gallery").getPublicUrl(img.file_path);
+          return {
+            src: urlData.publicUrl,
+            alt: img.alt_text || img.title || "Gallery image",
+          };
+        });
+        setAllImages([...staticGalleryImages, ...uploadedImages]);
+      }
+    };
+
+    fetchUploadedImages();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -115,7 +96,7 @@ const GalleryPage = () => {
             description="Click on any image to view it in full size. Use arrow keys to navigate, space to autoplay, or use the thumbnails below."
           />
 
-          <BentoGrid images={galleryImages} showLightbox />
+          <BentoGrid images={allImages} showLightbox />
         </div>
       </section>
 
