@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Upload, Trash2, Loader2 } from "lucide-react";
+import { Upload, Loader2, ImagePlus } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 interface ImageUploadDialogProps {
   trigger: React.ReactNode;
@@ -13,40 +13,26 @@ interface ImageUploadDialogProps {
 const ImageUploadDialog = ({ trigger }: ImageUploadDialogProps) => {
   const [open, setOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [images, setImages] = useState<{ id: string; file_path: string; alt_text: string | null }[]>([]);
-  const [loadingImages, setLoadingImages] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [progress, setProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const fetchImages = async () => {
-    setLoadingImages(true);
-    const { data, error } = await supabase
-      .from("gallery_images")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (!error && data) {
-      setImages(data);
-    }
-    setLoadingImages(false);
-  };
-
-  const handleOpenChange = (isOpen: boolean) => {
-    setOpen(isOpen);
-    if (isOpen) fetchImages();
-  };
-
-  const getPublicUrl = (filePath: string) => {
-    const { data } = supabase.storage.from("gallery").getPublicUrl(filePath);
-    return data.publicUrl;
-  };
-
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files || files.length === 0) return;
+    if (files) {
+      setSelectedFiles(Array.from(files));
+    }
+  };
+
+  const handleUpload = async () => {
+    if (selectedFiles.length === 0) return;
 
     setUploading(true);
-    for (const file of Array.from(files)) {
+    setProgress(0);
+    let uploaded = 0;
+
+    for (const file of selectedFiles) {
       const fileExt = file.name.split(".").pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
 
@@ -64,69 +50,94 @@ const ImageUploadDialog = ({ trigger }: ImageUploadDialogProps) => {
         alt_text: file.name.replace(/\.[^/.]+$/, ""),
         title: file.name.replace(/\.[^/.]+$/, ""),
       });
+
+      uploaded++;
+      setProgress(Math.round((uploaded / selectedFiles.length) * 100));
     }
 
-    toast({ title: "Upload complete!" });
+    toast({ title: `${uploaded} image${uploaded !== 1 ? "s" : ""} uploaded successfully!` });
     setUploading(false);
-    fetchImages();
+    setSelectedFiles([]);
+    setProgress(0);
     if (fileInputRef.current) fileInputRef.current.value = "";
+    setOpen(false);
   };
 
-  const handleDelete = async (id: string, filePath: string) => {
-    await supabase.storage.from("gallery").remove([filePath]);
-    await supabase.from("gallery_images").delete().eq("id", id);
-    setImages((prev) => prev.filter((img) => img.id !== id));
-    toast({ title: "Image deleted" });
+  const handleOpenChange = (isOpen: boolean) => {
+    if (!uploading) {
+      setOpen(isOpen);
+      if (!isOpen) {
+        setSelectedFiles([]);
+        setProgress(0);
+      }
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Manage Gallery Images</DialogTitle>
+          <DialogTitle className="flex items-center gap-2">
+            <ImagePlus className="w-5 h-5 text-primary" />
+            Upload Gallery Images
+          </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <Input
+        <div className="space-y-5 pt-2">
+          {/* Drop zone / file selector */}
+          <label
+            htmlFor="gallery-file-input"
+            className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary/50 hover:bg-accent/50 transition-colors"
+          >
+            <Upload className="w-10 h-10 text-muted-foreground" />
+            <div className="text-center">
+              <p className="text-sm font-medium text-foreground">
+                {selectedFiles.length > 0
+                  ? `${selectedFiles.length} file${selectedFiles.length !== 1 ? "s" : ""} selected`
+                  : "Click to select images"}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">JPG, PNG, WEBP supported</p>
+            </div>
+            <input
+              id="gallery-file-input"
               ref={fileInputRef}
               type="file"
               accept="image/*"
               multiple
-              onChange={handleUpload}
+              onChange={handleFileSelect}
               disabled={uploading}
-              className="flex-1"
+              className="hidden"
             />
-            {uploading && <Loader2 className="w-5 h-5 animate-spin text-primary" />}
-          </div>
+          </label>
 
-          {loadingImages ? (
-            <div className="flex justify-center py-8">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-            </div>
-          ) : images.length === 0 ? (
-            <p className="text-center text-muted-foreground py-8">No images uploaded yet.</p>
-          ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {images.map((img) => (
-                <div key={img.id} className="relative group rounded-lg overflow-hidden border border-border">
-                  <img
-                    src={getPublicUrl(img.file_path)}
-                    alt={img.alt_text || "Gallery image"}
-                    className="w-full h-32 object-cover"
-                  />
-                  <button
-                    onClick={() => handleDelete(img.id, img.file_path)}
-                    className="absolute top-2 right-2 p-1.5 rounded-full bg-destructive text-destructive-foreground opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                  <p className="text-xs text-muted-foreground p-1 truncate">{img.alt_text}</p>
-                </div>
-              ))}
+          {/* Progress bar */}
+          {uploading && (
+            <div className="space-y-2">
+              <Progress value={progress} className="h-2" />
+              <p className="text-xs text-muted-foreground text-center">{progress}% complete</p>
             </div>
           )}
+
+          {/* Upload button */}
+          <Button
+            onClick={handleUpload}
+            disabled={selectedFiles.length === 0 || uploading}
+            className="w-full"
+            size="lg"
+          >
+            {uploading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Uploading...
+              </>
+            ) : (
+              <>
+                <Upload className="w-4 h-4" />
+                Upload {selectedFiles.length > 0 ? `${selectedFiles.length} Image${selectedFiles.length !== 1 ? "s" : ""}` : "Images"}
+              </>
+            )}
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
